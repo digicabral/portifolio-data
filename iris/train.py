@@ -27,9 +27,14 @@ def serialize_object(model):
     with open("trained_classifier.pkl","wb") as file:
         pickle.dump(model, file)
 
-data = extract_data()
-X, y = preparing_features(data)
-model = train_model(X,y)
-serialize_object(model=model)
+# Run training pipeline
+def run():
+    data = extract_data()
+    X, y = preparing_features(data)
+    model = train_model(X,y)
+    serialize_object(model=model)
+
+if __name__ == "__main__":
+    run()
 
 
