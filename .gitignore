@@ -1,0 +1,4 @@
+
+wine_quality/data/winequalityN.csv
+wine_quality/requirements.txt
+wine_quality/wine.py
