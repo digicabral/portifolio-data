@@ -38,10 +38,7 @@ Arquivo: winequalityN.csv
 
 import pandas as pd
 import numpy as np
-
-#Visualização
-import seaborn as sns
-import matplotlib.pyplot as plt
+from pydantic import FilePath
 
 #Pre-processamento
 from sklearn.preprocessing import StandardScaler,OneHotEncoder,FunctionTransformer
@@ -58,7 +55,9 @@ from sklearn.tree import DecisionTreeClassifier
 #Hiperparâmetros
 from sklearn.model_selection import GridSearchCV
 
-df=pd.read_csv("winequalityN.csv")
+import joblib
+
+df=pd.read_csv("data/winequalityN.csv")
 
 """## Pre-processamento"""
 
@@ -88,12 +87,6 @@ model_pipeline =Pipeline(
 
 model_pipeline.fit(X_train,y_train)
 
-model_pipeline.score(X_train,y_train)
-
-model_pipeline.score(X_test,y_test)
-
-model_pipeline.get_params()
-
 params={
  'classifier__criterion': ['gini','entropy'],
  'classifier__max_depth': range(5,10),
@@ -105,10 +98,8 @@ grid=GridSearchCV(model_pipeline, params, cv=5)
 
 grid.fit(X_train,y_train)
 
-grid.score(X_train,y_train)
-
-grid.score(X_test,y_test)
-
-grid.get_params()
+print(grid.score(X_test,y_test))
 
 best_pipeline=grid.best_estimator_
+
+joblib.dump(best_pipeline, filename="models/model_pipeline.pkl")
