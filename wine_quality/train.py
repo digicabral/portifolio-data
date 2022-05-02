@@ -58,44 +58,13 @@ from sklearn.tree import DecisionTreeClassifier
 #Hiperparâmetros
 from sklearn.model_selection import GridSearchCV
 
-pd.__version__
-
-"""#### Análise do dataset"""
-
 df=pd.read_csv("winequalityN.csv")
-
-df.shape
-
-df.info()
-
-df.describe()
-
-df.isnull().sum()
-
-len(df)-len(df.drop_duplicates())
-
-"""## EDA"""
-
-df.hist(bins=25,figsize=(20,20))
-
-sns.countplot(df['type'])
-
-correlacao=df.corr()
-
-plt.figure(figsize=(20,20))
-sns.heatmap(correlacao,annot=True)
 
 """## Pre-processamento"""
 
 df=df.drop_duplicates(keep="first")
 
-df.shape
-
-sns.countplot(df['quality'])
-
 df['quality']=np.where(df['quality']>=6,1,0)
-
-sns.countplot(df['quality'])
 
 X=df.drop(['quality'],axis=1)
 
@@ -142,5 +111,4 @@ grid.score(X_test,y_test)
 
 grid.get_params()
 
-best_piepeline=grid.best_estimator_
-
+best_pipeline=grid.best_estimator_
