@@ -12,7 +12,7 @@ import itertools
 
 # Load Data
 def load_data():
-    df = pd.read_excel(r'C:\Users\rodrigo.cabral\Documents\portifolio-data\d2g19\data\dataset.xlsx', header=0, index_col=0, parse_dates=True, squeeze=True, engine='openpyxl')
+    df = pd.read_excel('data/dataset.xlsx', header=0, index_col=0, parse_dates=True, squeeze=True, engine='openpyxl')
     return df
 
 # Adjusting data
